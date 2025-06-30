@@ -15,4 +15,25 @@ class Solution {
 
         return result;
     }
+
+    public int lengthOfLongestSubstring_with_map(String s) {
+        Map<Character, Integer> map = new HashMap();
+        int front = 0;
+        int result = 0;
+
+        if (s.length() != 0) {
+            for (int i = 0; i < s.length(); i++) {
+                Character current = s.charAt(i);
+                if (map.containsKey(current) && map.get(current) >= front) {
+                    front = map.get(current) + 1;
+                } 
+                map.put(current, i);
+                if (result < i - front + 1) {
+                    result = i - front + 1;
+                }
+            }
+        }
+
+        return result;
+    }
 }
