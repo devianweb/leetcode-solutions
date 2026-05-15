@@ -11,9 +11,11 @@ def meteor_shower(solar_system):
                 idx = 0
                 while idx < len(solar_system):
                     top = solar_system[idx]
+                    #is it a planet with protection? if so, remove 1 layer
                     if top.startswith('('):
                         solar_system[idx] = top[1:-1]
                         break
+                    #is it a meteor? if not, bye bye planet
                     elif not top.startswith('<') and not top.endswith('>'):
                         solar_system.pop(idx)
                         break
@@ -22,7 +24,7 @@ def meteor_shower(solar_system):
                     
         #left meteor, go hit things or fly away                
         elif body.startswith('<'):
-            #hits top of system
+            #hits top of system, this doesn't need complex meteor skipping logic as this stack will only ever contain planets
             if len(system) != 0:
                 top = system[-1]
                 if top.startswith('('):
